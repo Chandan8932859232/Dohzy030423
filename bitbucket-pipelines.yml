@@ -1,0 +1,35 @@
+image:
+  name: 126797526485.dkr.ecr.us-east-2.amazonaws.com/ansible:latest
+  aws:
+    access-key: $ECR_ACCESS_KEY
+    secret-key: $ECR_SECRET_KEY
+pipelines:
+  custom: # Pipelines that are triggered manually
+    deploy-dev-ansible:
+      - step:
+          name: Run deployment playbook
+          deployment: develop
+          script:
+            - export DEPLOYMENT=develop
+            - /root/prompt.sh
+    deploy-staging-ansible:
+      - step:
+          name: Run deployment playbook
+          deployment: staging
+          script:
+            - export DEPLOYMENT=staging
+            - /root/prompt.sh
+    deploy-beta-ansible:
+      - step:
+          name: Run deployment playbook
+          deployment: beta
+          script:
+            - export DEPLOYMENT=beta
+            - /root/prompt.sh
+    deploy-prod-ansible:
+      - step:
+          name: Run deployment playbook
+          deployment: production
+          script:
+            - export DEPLOYMENT=prod
+            - /root/prompt.sh
